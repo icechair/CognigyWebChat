@@ -38,11 +38,12 @@ class Helpers {
 		messageContainer.appendChild(message);
 
 		//Create user avatar and appendChild to message contanier
+		/*
 		var avatar = document.createElement("img");
 		avatar.className = "cognigy-chat-user-avatar";
 		avatar.src = "https://s3.eu-central-1.amazonaws.com/cognigydev/CognigyWebchat/images/user_avatar.jpg";
 		messageContainer.appendChild(avatar);
-
+		*/
 		chatContainer && chatContainer.appendChild(messageContainer);
 		//Keep scrollbar fixed at bottom when new messages are added
 		if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -60,11 +61,12 @@ class Helpers {
 		messageContainer.appendChild(message);
 
 		//Create user avatar and appendChild to message contanier
+		/*
 		var avatar = document.createElement("img");
 		avatar.className = "cognigy-chat-user-avatar";
 		avatar.src = "https://s3.eu-central-1.amazonaws.com/cognigydev/CognigyWebchat/images/user_avatar.jpg";
 		messageContainer.appendChild(avatar);
-
+		*/
 		chatContainer && chatContainer.appendChild(messageContainer);
 		//Keep scrollbar fixed at bottom when new messages are added
 		if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -82,11 +84,12 @@ class Helpers {
 		messageContainer.appendChild(message);
 
 		//Create user avatar and append to message contanier
+		/*
 		var avatar = document.createElement("img");
 		avatar.className = "cognigy-chat-user-avatar";
 		avatar.src = "https://s3.eu-central-1.amazonaws.com/cognigydev/CognigyWebchat/images/user_avatar.jpg";
 		messageContainer.appendChild(avatar);
-
+		*/
 		chatContainer && chatContainer.appendChild(messageContainer);
 		//Keep scrollbar fixed at bottom when new messages are added
 		if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
