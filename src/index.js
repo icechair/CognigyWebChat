@@ -112,6 +112,7 @@ async function init(userOptions: any, outputCallback: (output: { text: string, d
 
 	if (options.colorScheme && (BrowserDetect.browser === "MSIE" || BrowserDetect.browser === "Microsoft Edge")) {
 		(document: any).webchatColor = options.colorScheme;
+		(document: any).webchatTextColor = ContrastColor(options.colorScheme);
 	};
 
 
@@ -150,12 +151,14 @@ async function init(userOptions: any, outputCallback: (output: { text: string, d
 	/* Check whether we have a custom color scheme defined and whether we don't use IE */
 	if (options.colorScheme && BrowserDetect.browser !== "MSIE" && BrowserDetect.browser !== "Microsoft Edge") {
 		document.documentElement && document.documentElement.style.setProperty("--color", options.colorScheme);
+		document.documentElement && document.documentElement.style.setProperty("--foreground", ContrastColor(options.colorScheme));
 	} else if (options.colorScheme) {
 		const colorCollection = document.querySelectorAll(".button_template_container, .button, .list_template_element_button,	.cognigy-persistent-menu-item, .quick_reply");
 		changeColor(colorCollection, "color", options.colorScheme);
 
 		const bgColorCollection = document.querySelectorAll(".button_template_text,	.cognigy-chat-state-closed,	.cognigy-chat-state-open, .cognigy-chat-header-container, .cognigy-chat-header-container__open, .cognigy-chat-bot-message");
 		changeColor(bgColorCollection, "background-color", options.colorScheme);
+		changeColor(bgColorCollection, "color", ContrastColor(options.colorScheme));
 
 		function changeColor(coll: any, key: any, value: any) {
 			for (var i = 0, len = coll.length; i < len; i++) {
@@ -451,7 +454,7 @@ const buildHTMLDocument = (options) => {
 	headerTitle.appendChild(document.createTextNode("Chat"));
 	headerSubtitle.appendChild(document.createTextNode("Online"));
 	headerText.appendChild(headerTitle);
-	headerText.appendChild(headerSubtitle);
+	//headerText.appendChild(headerSubtitle);
 
 	//Create bot avatar with Cognigy logo and append to header
 	var avatar = ((Helpers.createElement("img", "cognigy-header-avatar"): any): HTMLImageElement);
@@ -653,6 +656,21 @@ function generateRandomId() {
 		return Date.now().toString();
 	}
 }
+
+function ContrastColor(color = "#333333") {
+	if (color[0] !== "#") return "#000000";
+	if (color.length === 4) {
+		color = color + color.slice(1)
+	}
+	const r = +("0x" + color.slice(1, 3))
+	const g = +("0x" + color.slice(3, 5))
+	const b = +("0x" + color.slice(5))
+	const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+	if (luminance > 0.5) return "#000000";
+	return "#ffffff";
+}
+
+
 
 module.exports = {
 	init
